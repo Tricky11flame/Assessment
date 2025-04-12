@@ -13,7 +13,7 @@ export const TextSettings = () => {
         "border",
         "typography",
         "other",
-      ]}
+      ]}  
     >
       {/* Custom Section for Decoration Settings */}
       <ToolbarSection title="Decoration" />
