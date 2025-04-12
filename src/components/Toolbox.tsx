@@ -6,6 +6,8 @@ import { ToolboxButton } from "./BaseComponents/ToolboxButton";
 import { ButtonIcon } from "./Icons/ButtonIcon";
 import { Sidebar, SidebarBody } from "./ui/sidebar";
 import { createDefaultContainer } from "./Demo/Container";
+import { createDefaultHeading } from "./Demo/Heading";
+
 import { TextIcon } from "./Icons/TextIcon";
 
 export const toolboxItems = [
@@ -24,6 +26,11 @@ export const toolboxItems = [
     component: createDefaultContainer(),
     dataCy: "toolbox-container",
   },
+  {
+    name: "Heading",
+    component: createDefaultHeading(),
+    dataCy: "toolbox-heading",
+  }
 ];
 
 export const Toolbox = () =>
