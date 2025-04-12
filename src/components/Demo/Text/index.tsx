@@ -3,6 +3,8 @@ import React from "react";
 import ContentEditable from "react-contenteditable";
 import { useNode, useEditor } from "@craftjs/core";
 import { TextSettings } from "./TextSettings";
+import { useEffect , useState , useRef } from "react";
+import TextToolbar from "./TextToolbar";
 
 type TextProps = {
   content: string;
@@ -34,9 +36,10 @@ type TextProps = {
   decoration?: string;
   opacity?: number;
   cursor?: string;
+  trigger?:string;
 };
 
-export const Text = ({ className, content, ...props }: TextProps) => {
+export const Text = ({ className, trigger = "click" ,content, ...props }: TextProps) => {
   const {
     connectors: { connect },
     actions: { setProp },
@@ -44,8 +47,57 @@ export const Text = ({ className, content, ...props }: TextProps) => {
   const { enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
   }));
+
+
+// TextSetting  Functionality
+// const inputRef = useRef<HTMLDivElement>(null);
+
+const [show, setShow] = useState(false);
+const wrapperRef = useRef<HTMLDivElement>(null);
+
+const handleMouseOver = () => {
+  if (trigger === "hover") {
+    setShow(true);
+  };
+};
+
+const handleMouseLeft = () => {
+  if (trigger === "hover") {
+    setShow(false);
+  };
+};
+
+useEffect(() => {
+  function handleClickOutside(event) {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setShow(false);
+    }
+  }
+
+  if (show) {
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }
+}, [show, wrapperRef]);
+
+
   return (
-    <BaseComponent
+    <div
+      ref={wrapperRef}
+      onMouseEnter={handleMouseOver}
+      onMouseLeave={handleMouseLeft}
+      className="w-fit h-fit relative flex justify-center"
+      >
+      <div
+        onClick={() => setShow(!show)}
+      >
+         {/* child */}
+         <>
+         <BaseComponent
       className={className}
       $buttonStyle={props.buttonStyle}
       $background={props.background}
@@ -74,7 +126,7 @@ export const Text = ({ className, content, ...props }: TextProps) => {
       $decoration={props.decoration}
       $opacity={props.opacity}
       $cursor={props.cursor}
-    >
+      >
       <ContentEditable
         innerRef={connect}
         html={content} // innerHTML of the editable div
@@ -83,8 +135,27 @@ export const Text = ({ className, content, ...props }: TextProps) => {
           setProp((prop: any) => (prop.content = e.target.value), 500);
         }} // use true to disable editing
         tagName="p" // Use a custom HTML tag (uses a div by default)
-      />
+        />
     </BaseComponent>
+    {/* <TextSettings/> */}
+    </>
+      </div>
+      <div
+        hidden={!show}
+        className="min-w-fit w-[200px] h-fit absolute bottom-[100%] z-50 ">
+          <div className="">
+            {/* settings */}
+            <TextToolbar
+            targetRef={wrapperRef }
+            // onDelete={handlers.onDelete}
+            // onDuplicate={handlers.onDuplicate}
+            // onMoveUp={handlers.onMoveUp}
+            // onAdd={handlers.onAdd}
+          />
+
+          </div>
+      </div>
+    </div>
   );
 };
 
