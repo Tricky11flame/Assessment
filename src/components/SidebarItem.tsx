@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { ArrowIcon } from "./Icons/arrow";
+import { ArrowIcon } from "./Icons/Arrow";
 
 export type SidebarItemProps = {
   title: string;

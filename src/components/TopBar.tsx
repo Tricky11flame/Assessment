@@ -3,6 +3,7 @@ import React from "react";
 import { useEditor } from "@craftjs/core";
 import { EyeIcon } from "./Icons/EyeIcon";
 import { SlashedEyeIcon } from "./Icons/SlashedEyeIcon";
+import SaveButton from "./Demo/SaveButton";
 
 export const Topbar = () => {
   const { actions, enabled, canUndo, canRedo } = useEditor((state, query) => ({
@@ -39,6 +40,7 @@ export const Topbar = () => {
               : "opacity-0  hidden animate-out"
           }`}
         >
+          <SaveButton/>
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded mr-2 disabled:opacity-50"
             disabled={!canUndo}

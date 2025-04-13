@@ -20,7 +20,7 @@ type Props = {
   onAdd?: () => void;
 };
 
-const TextToolbar: React.FC<Props> = ({
+const HeadingToolbar: React.FC<Props> = ({
   //We use it to position the toolbar near the target element 
   targetRef,
   onDelete,
@@ -88,14 +88,14 @@ const TextToolbar: React.FC<Props> = ({
   return (
     <div
       ref={toolbarRef}
-      className=" fixed z-50 bg-blue-500 text-white px-1 flex gap-1"
+      className=" fixed z-50 bg-blue-500 Heading-white px-1 flex gap-1 text-white"
       style={{
         top: position.top,
         left: position.left,
         transition: "top 0.08s ease",
       }}
     >
-      <span className="text-sm ">Text</span>
+      <span className="Heading-sm ">Heading</span>
       <button onClick={onAdd} title="Add"><Move height={12} width={12} fill="white"/> </button>
       <button onClick={onMoveUp} title="Move Up"><ArrowUp height={12} width={12} fill="white"/></button>
       <button onClick={onDelete} title="Delete"><Delete height={12} width={12} fill="white" /></button>
@@ -104,4 +104,4 @@ const TextToolbar: React.FC<Props> = ({
   );
 };
 
-export default TextToolbar;
+export default HeadingToolbar;

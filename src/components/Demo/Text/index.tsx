@@ -48,11 +48,7 @@ export const Text = ({ className, trigger = "click" ,content, ...props }: TextPr
     enabled: state.options.enabled,
   }));
 
-
-// TextSetting  Functionality
-// const inputRef = useRef<HTMLDivElement>(null);
-
-const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 const wrapperRef = useRef<HTMLDivElement>(null);
 
 const handleMouseOver = () => {
@@ -95,9 +91,8 @@ useEffect(() => {
       <div
         onClick={() => setShow(!show)}
       >
-         {/* child */}
-         <>
-         <BaseComponent
+        <>
+        <BaseComponent
       className={className}
       $buttonStyle={props.buttonStyle}
       $background={props.background}
@@ -136,15 +131,13 @@ useEffect(() => {
         }} // use true to disable editing
         tagName="p" // Use a custom HTML tag (uses a div by default)
         />
-    </BaseComponent>
-    {/* <TextSettings/> */}
-    </>
+        </BaseComponent>
+        </>
       </div>
       <div
         hidden={!show}
         className="min-w-fit w-[200px] h-fit absolute bottom-[100%] z-50 ">
           <div className="">
-            {/* settings */}
             <TextToolbar
             targetRef={wrapperRef }
             // onDelete={handlers.onDelete}
