@@ -44,13 +44,9 @@ const HeadingToolbar: React.FC<Props> = ({
   const updatePosition = useCallback(() => {
     const target = targetRef.current;
     const toolbar = toolbarRef.current;
-    // console.log("targetRef:", target);
-    // console.log("toolbarRef:",toolbarRef);
-    // This ensures both elements exist in the DOM before trying to measure and use them.
+    
     if (target && toolbar) {
       const rect = target.getBoundingClientRect();
-    //   const toolbarWidth = toolbar.offsetWidth;
-
       const toolbarHeight = toolbar.offsetHeight;
       setPosition({
         top: rect.top + window.scrollY - toolbarHeight+8, // adjust this value to get the spacing you want
