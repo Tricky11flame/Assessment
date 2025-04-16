@@ -1,23 +1,22 @@
 import { useEditor } from "@craftjs/core";
-import { Buffer } from "buffer";
+import lz from "lzutf8";
 
 export default function SaveButton() {
   const { query } = useEditor();
 
   const handleSave = async () => {
     const json = query.serialize();
-    const encoded = Buffer.from(json).toString("base64");
-
+    const encoded = (lz.encodeBase64(lz.compress(json)) );
     try {
       const res = await fetch('https://67f7183e42d6c71cca6403bd.mockapi.io/v1/api/pages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pageContent: encoded }),
+        body: JSON.stringify({ data: encoded }),
       });
-
+      const data = await res.json() ;
+      localStorage.setItem('PageId', data.id);
       if (!res.ok) throw new Error('Save failed');
 
-      console.log('✅ Saved:', encoded);
     } catch (err) {
       console.error('❌ Save Error:', err);
     }
