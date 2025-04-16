@@ -93,7 +93,11 @@ export const Heading = ({
     >
       <div onClick={() => setShow(!show)}>
         <BaseComponent
-          ref={connect}
+          ref={(instance) => {
+            if (instance) {
+              connect(instance);
+            }
+          }}
           className={className}
           $buttonStyle={props.buttonStyle}
           $background={props.background}
