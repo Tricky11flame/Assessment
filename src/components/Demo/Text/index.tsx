@@ -64,8 +64,8 @@ const handleMouseLeft = () => {
 };
 
 useEffect(() => {
-  function handleClickOutside(event) {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+  function handleClickOutside(event:MouseEvent) {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
       setShow(false);
     }
   }
