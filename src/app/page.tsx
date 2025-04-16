@@ -50,10 +50,13 @@ function EditorContentLoader() {
   return json ? (
     <Frame json={json}>
       <Element canvas is="div" id="Base Container">
-        <Text content="hii" />
       </Element>
     </Frame>
   ) : (
-    <div className="text-white text-center mt-10">Loading...</div>
+    <Frame>
+      <Element canvas is="div" id="Base Container">
+        <Text content="hii" />
+      </Element>
+    </Frame>
   );
 }
